@@ -1,27 +1,54 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GithubProvider from "next-auth/providers/github";
 import { getUser } from "../../../lib/server";
 import { User } from "../../../types";
 
 // Your NextAuth secret (generate a new one for production)
 // More info: https://next-auth.js.org/configuration/options#secret
-export const NEXTAUTH_SECRET = process.env.NEXTAUTH_SECRET;
+export const JWT_SECRET = process.env.JWT_SECRET;
 
 export const authOptions = {
-  secret: NEXTAUTH_SECRET,
+  secret: JWT_SECRET,
   callbacks: {
-    // Get extra user info from your database to pass to front-end
-    // For front end, update next-auth.d.ts with session type
-    async session({ session }: { session: any }) {
-      const userInfo: User | null = await getUser(session.user.email);
+    async signIn({ user }: any) {
+      console.log(user);
 
-      if (!userInfo) {
-        throw new Error("User not found");
-      }
+      return !!user;
+    },
+    async session({ session, token }: { session: any; token: any }) {
+      // const sessionInfoo: any = {
+      //   user: {
+      //     info: {
+      //       ...session.user,
+      //       groupIds: ["engineering", "design"],
+      //     },
+      //   },
+      //   info: session.user,
+      // };
 
-      session.user.info = userInfo;
+      session.user.info = {
+        id: session.user.email,
+        name: session.user.name,
+        avatar: session.user.image,
+        groupIds: ["product", "engineering", "design"],
+      };
       return session;
     },
+    // async session({ session }: { session: any }) {
+    //   console.log(session.user);
+    //   const userInfo: User | null = await getUser(session.user.email);
+    //   console.log(userInfo);
+
+    //   console.log(userInfo);
+
+    //   if (!userInfo) {
+    //     throw new Error("User not found");
+    //   }
+
+    //   session.user.info = userInfo;
+    //   return session;
+    // },
   },
   pages: {
     signIn: "/signin",
@@ -41,6 +68,7 @@ export const authOptions = {
         },
       },
       async authorize(credentials) {
+        console.log(credentials);
         if (!credentials) {
           return null;
         }
@@ -60,14 +88,12 @@ export const authOptions = {
       },
     }),
 
-    /*
     // Use GitHub authentication
     // import GithubProvider from "next-auth/providers/github";
     GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID as string,
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
     }),
-    */
 
     /*
     // Use Auth0 authentication

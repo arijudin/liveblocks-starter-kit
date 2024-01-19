@@ -2,10 +2,10 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["liveblocks.io"],
+    domains: ["liveblocks.io", "avatars.githubusercontent.com"],
   },
   env: {
     LIVEBLOCKS_SECRET_KEY: process.env.LIVEBLOCKS_SECRET_KEY,
-    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    JWT_SECRET: process.env.JWT_SECRET,
   },
 };

@@ -43,10 +43,10 @@ export function DashboardHeader({
               <div className={styles.profilePopover}>
                 <div className={styles.profilePopoverInfo}>
                   <span className={styles.profilePopoverName}>
-                    {session.user.info.name}
+                    {session.user?.info?.name}
                   </span>
                   <span className={styles.profilePopoverId}>
-                    {session.user.info.id}
+                    {session.user?.info?.id}
                   </span>
                 </div>
                 <div className={styles.profilePopoverActions}>
@@ -66,9 +66,9 @@ export function DashboardHeader({
             <button className={styles.profileButton}>
               <Avatar
                 className={styles.profileAvatar}
-                name={session.user.info.name}
+                name={session.user?.info?.name}
                 size={32}
-                src={session.user.info.avatar}
+                src={session.user?.info?.avatar}
               />
             </button>
           </Popover>

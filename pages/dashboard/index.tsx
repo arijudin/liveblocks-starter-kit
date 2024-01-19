@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps<ServerSideProps> = async ({
     };
   }
 
-  const groups = await Server.getGroups(session?.user.info.groupIds ?? []);
+  const groups = await Server.getGroups(session?.user?.info?.groupIds ?? []);
 
   return {
     props: { groups, session },

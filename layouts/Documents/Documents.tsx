@@ -51,7 +51,7 @@ export function DocumentsLayout({
     if (filter === "drafts") {
       return {
         documentType: currentDocumentType,
-        userId: session.user.info.id,
+        userId: session.user?.info?.id,
         drafts: true,
         limit: DOCUMENT_LOAD_LIMIT,
       };
@@ -69,8 +69,8 @@ export function DocumentsLayout({
     // Get all documents for the current user
     return {
       documentType: currentDocumentType,
-      userId: session.user.info.id,
-      groupIds: session.user.info.groupIds,
+      userId: session.user?.info?.id,
+      groupIds: session.user?.info?.groupIds,
       limit: DOCUMENT_LOAD_LIMIT,
     };
   }, [filter, group, session, documentType]);
@@ -123,7 +123,7 @@ export function DocumentsLayout({
   const createDocumentButton = (
     <DocumentCreatePopover
       align="end"
-      userId={session.user.info.id}
+      userId={session.user?.info?.id}
       groupIds={group?.id ? [group.id] : undefined}
       draft={filter === "drafts" || filter === "all"}
       sideOffset={12}

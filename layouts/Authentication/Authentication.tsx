@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { getProviders, signIn } from "next-auth/react";
 import { ComponentProps } from "react";
 import { users } from "../../data/users";
+import { SignInIcon } from "../../icons";
 import { Button } from "../../primitives/Button";
 import { Select } from "../../primitives/Select";
 import styles from "./Authentication.module.css";
@@ -51,13 +52,22 @@ function NextAuthLogin({ providers }: Props) {
 function DemoLogin() {
   return (
     <div className={styles.actions}>
-      <Select
+      {/* <Select
         items={users.map((user) => ({ value: user.id, title: user.name }))}
         onChange={(email) => {
           signIn("credentials", { email });
         }}
         placeholder="Choose a profile…"
-      />
+      /> */}
+      <div>
+        <Button
+          className={styles.profilePopoverButton}
+          icon={<SignInIcon />}
+          onClick={() => signIn("github", {})}
+        >
+          Sign In
+        </Button>
+      </div>
     </div>
   );
 }
