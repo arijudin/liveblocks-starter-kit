@@ -1,12 +1,12 @@
 import clsx from "clsx";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { ComponentProps, useMemo, useState } from "react";
 import {
   DocumentCreatePopover,
   DocumentRowSkeleton,
 } from "../../components/Documents";
 import { DocumentRowGroup } from "../../components/Documents/DocumentRowGroup";
-import { PlusIcon } from "../../icons";
+import { PlusIcon, SignOutIcon } from "../../icons";
 import { usePaginatedDocumentsSWR } from "../../lib/client";
 import { Button } from "../../primitives/Button";
 import { Container } from "../../primitives/Container";
@@ -104,6 +104,16 @@ export function DocumentsLayout({
         <div className={styles.container}>
           <div className={styles.emptyState}>
             <p>You don’t have access to these documents.</p>
+
+            <div className={styles.profilePopoverActions}>
+              <Button
+                className={styles.profilePopoverButton}
+                icon={<SignOutIcon />}
+                onClick={() => signOut()}
+              >
+                Sign out
+              </Button>
+            </div>
           </div>
         </div>
       </Container>

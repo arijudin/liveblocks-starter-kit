@@ -64,3 +64,12 @@
   place-items: center;
   text-align: center;
 }
+
+.profilePopoverActions {
+  padding: var(--space-3);
+}
+
+.profilePopoverButton {
+  width: 100%;
+  place-content: center;
+}
