@@ -6,27 +6,13 @@ import { User } from "../../../types";
 
 // Your NextAuth secret (generate a new one for production)
 // More info: https://next-auth.js.org/configuration/options#secret
-export const JWT_SECRET = process.env.JWT_SECRET;
-
 export const authOptions = {
-  secret: JWT_SECRET,
+  secret: process.env.JWT_SECRET,
   callbacks: {
     async signIn({ user }: any) {
-      console.log(user);
-
       return !!user;
     },
-    async session({ session, token }: { session: any; token: any }) {
-      // const sessionInfoo: any = {
-      //   user: {
-      //     info: {
-      //       ...session.user,
-      //       groupIds: ["engineering", "design"],
-      //     },
-      //   },
-      //   info: session.user,
-      // };
-
+    async session({ session }: { session: any; token: any }) {
       session.user.info = {
         id: session.user.email,
         name: session.user.name,

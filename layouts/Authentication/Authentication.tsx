@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import { getProviders, signIn } from "next-auth/react";
 import { ComponentProps } from "react";
-import { users } from "../../data/users";
+// import { users } from "../../data/users";
 import { SignInIcon } from "../../icons";
 import { Button } from "../../primitives/Button";
-import { Select } from "../../primitives/Select";
+// import { Select } from "../../primitives/Select";
 import styles from "./Authentication.module.css";
 
 interface Props extends ComponentProps<"div"> {
